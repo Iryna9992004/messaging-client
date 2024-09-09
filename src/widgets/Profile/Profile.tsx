@@ -7,6 +7,8 @@ import MemberList from "../../features/MemberList";
 import { MemberDto } from "./types/MemberDto";
 import UserPhoto from "../../UI/UserPhoto";
 import ProfileNavbar from "../../features/ProfileNavbar";
+import { updateWorkerData } from "../../services/workerService";
+import { updateCompanyData } from "../../services/companyService";
 
 export default function Profile() {
   const [memberList, setMemberList] = useState<MemberDto[]>([
@@ -34,6 +36,47 @@ export default function Profile() {
   ]);
   const [userData, setUserData] = useState<any>({});
   const [userName, setUserName] = useState<string>("");
+
+  const [companyName, setCompanyName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+
+  const handleUpdateWorkerData = async () => {
+    const userString = localStorage.getItem("user");
+    if (!userString) {
+      return null;
+    }
+    const user = JSON.parse(userString);
+    console.log(user.email);
+  
+    if (user.role === "worker") {
+      const response = await updateWorkerData({
+        email: user.email,
+        firstName: firstName,
+        lastName: lastName,
+      });
+      if (response) {
+        const newUser = { ...user, ...response.data };
+        const newUserString = JSON.stringify(newUser);
+        localStorage.setItem("user", newUserString);
+        setUserName(`${newUser.firstName} ${newUser.lastName}`);
+      }
+    } 
+  
+    if (user.role === "company") { // Розділено перевірку ролі "company" в окремий блок
+      const response = await updateCompanyData({
+        email: user.email,
+        companyName,
+      });
+      if (response) {
+        const newUser = { ...user, ...response.data };
+        const newUserString = JSON.stringify(newUser);
+        localStorage.setItem("user", newUserString);
+        setUserName(`${companyName}`);
+      }
+    }
+  };
+  
 
   useEffect(() => {
     const user = localStorage.getItem("user");
@@ -91,20 +134,39 @@ export default function Profile() {
           </div>
 
           <div className="flex items-center gap-[5px]">
-            <button className="bg-[#4182F9] w-[93px] text-white rounded-md text-sm px-3 py-3 duration-500 hover:bg-blue-600">
+            <button
+              className="bg-[#4182F9] w-[93px] text-white rounded-md text-sm px-3 py-3 duration-500 hover:bg-blue-600"
+              onClick={() => handleUpdateWorkerData()}
+            >
               Save
             </button>
           </div>
         </div>
 
-        {userData.role==="company"?<div className="flex p-3 flex-col gap-3">
-          <ProfileInput placeholder="Company Name" />
-        </div>:null}
+        {userData.role === "company" ? (
+          <div className="flex p-3 flex-col gap-3">
+            <ProfileInput
+              placeholder="Company Name"
+              value={companyName}
+              setValue={setCompanyName}
+            />
+          </div>
+        ) : null}
 
-        {userData.role==="worker"?<div className="flex p-3 flex-col gap-3">
-          <ProfileInput placeholder="First Name" />
-          <ProfileInput placeholder="Last Name" />
-        </div>:null}
+        {userData.role === "worker" ? (
+          <div className="flex p-3 flex-col gap-3">
+            <ProfileInput
+              placeholder="First Name"
+              value={firstName}
+              setValue={setFirstName}
+            />
+            <ProfileInput
+              placeholder="Last Name"
+              value={lastName}
+              setValue={setLastName}
+            />
+          </div>
+        ) : null}
 
         <div className="flex flex-col p-3 w-full">
           <div className="flex items-center justify-between w-full">

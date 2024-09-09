@@ -21,7 +21,8 @@ export default function ForgotPasswordModal({
     const response = await resetPass(email, password);
 
     if(response && response.hasOwnProperty('data')) {
-      handleStage("success")
+      handleStage("success");
+      localStorage.removeItem('resetPassEmail');
     }
   }
   return (
