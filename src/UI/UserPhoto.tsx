@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Edit2 } from "react-feather";
+import React, { useState } from 'react';
+import { Edit2 } from 'react-feather';
 
 export default function UserPhoto() {
   const [hover, setHover] = useState(false);

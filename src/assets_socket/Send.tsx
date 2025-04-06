@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 export default function Send() {
   const [isSelected, setIsSelected] = useState(false);
@@ -13,24 +13,25 @@ export default function Send() {
           ? {
               padding: 15,
               borderRadius: 16,
-              background: "#27AE60",
-              transition: "0.6s",
-              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+              background: '#27AE60',
+              transition: '0.6s',
+              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
             }
           : {
               padding: 15,
               borderRadius: 16,
-              background: "#FAFAFA",
-              transition: "0.6s",
+              background: '#FAFAFA',
+              transition: '0.6s',
             }
-      }>
+      }
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="18"
         height="18"
         viewBox="0 0 24 24"
         fill="none"
-        stroke={isSelected ? "white" : "#27AE60"}
+        stroke={isSelected ? 'white' : '#27AE60'}
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"

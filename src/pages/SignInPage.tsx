@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { User, Lock } from "react-feather";
-import { useNavigate } from "react-router-dom";
-import Input from "../UI/Input";
-import Select from "../UI/Select";
-import { roles } from "../data/roles";
-import useLogin from "../hooks/loginHook";
-import ResetingPassword from "../widgets/ResetingPassword";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { User, Lock } from 'react-feather';
+import { useNavigate } from 'react-router-dom';
+import Input from '../UI/Input';
+import Select from '../UI/Select';
+import { roles } from '../data/roles';
+import useLogin from '../hooks/loginHook';
+import ResetingPassword from '../widgets/ResetingPassword';
+import { Link } from 'react-router-dom';
 
 export default function SignInPage() {
   const navigate = useNavigate();
   const [isResetPasswordOpened, setIsResetPasswordOpened] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [selectedRole, setSelectedRole] = useState("worker");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [selectedRole, setSelectedRole] = useState('worker');
   const loginMutation = useLogin(selectedRole);
 
   const [emailError, setEmailError] = useState(false);
@@ -34,10 +34,10 @@ export default function SignInPage() {
         { email, password },
         {
           onSuccess: (data) => {
-            navigate("/messaging");
+            navigate('/messaging');
           },
           onError: (error) => {
-            console.log("Err", error);
+            console.log('Err', error);
           },
         }
       );
@@ -49,11 +49,11 @@ export default function SignInPage() {
   };
 
   useEffect(() => {
-    setEmailError(!validateEmail(email) && email !== ""); // Перевіряємо формат email
+    setEmailError(!validateEmail(email) && email !== ''); // Перевіряємо формат email
   }, [email]);
 
   useEffect(() => {
-    setPasswordError(password.length < 6 && password !== ""); // Мінімум 6 символів
+    setPasswordError(password.length < 6 && password !== ''); // Мінімум 6 символів
   }, [password]);
 
   return (
@@ -62,14 +62,8 @@ export default function SignInPage() {
         <ResetingPassword handleResetPassoword={handleResetPassoword} />
       ) : null}
       <div className="flex flex-col items-center gap-5 min-w-[350px] border p-7 rounded-xl shadow-lg">
-        <span className="font-semibold text-gray-400 text-3xl font-oswald mb-4">
-          Login
-        </span>
-        <Select
-          list={roles}
-          text={selectedRole}
-          selectRole={handleSelectRole}
-        />
+        <span className="font-semibold text-gray-400 text-3xl font-oswald mb-4">Login</span>
+        <Select list={roles} text={selectedRole} selectRole={handleSelectRole} />
         <Input
           value={email}
           setValue={setEmail}

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import Pin from "../assets_socket/Pin";
-import { ReactComponent as ReadMessage } from "../assets_socket/ReadMessage.svg";
-import { ReactComponent as UnreadMessage } from "../assets_socket/UnreadMessage.svg";
-import ChatSideBar from "../components/ChatSideBar";
+import React, { useState } from 'react';
+import Pin from '../assets_socket/Pin';
+import { ReactComponent as ReadMessage } from '../assets_socket/ReadMessage.svg';
+import { ReactComponent as UnreadMessage } from '../assets_socket/UnreadMessage.svg';
+import ChatSideBar from '../components/ChatSideBar';
 
 interface ChatItem {
   id: string;
@@ -17,39 +17,38 @@ interface ChatItem {
 export default function Messages() {
   const [chatList, setChatList] = useState<ChatItem[]>([
     {
-      id: "1",
+      id: '1',
       isPinned: true,
-      firstName: "Vasyl",
-      lastName: "Petrenko",
-      sendingTime: "16:40",
-      lastMessage: "How are you?",
-      readList: ["Vasyl", "Petro", "Stepan"],
-      newMessages: ["Hello!", "How are you?"],
+      firstName: 'Vasyl',
+      lastName: 'Petrenko',
+      sendingTime: '16:40',
+      lastMessage: 'How are you?',
+      readList: ['Vasyl', 'Petro', 'Stepan'],
+      newMessages: ['Hello!', 'How are you?'],
     },
     {
-      id: "2",
+      id: '2',
       isPinned: true,
-      firstName: "Vasyl",
-      lastName: "Petrenko",
-      sendingTime: "16:40",
-      lastMessage: "How are you?",
-      readList: ["Vasyl", "Petro", "Stepan"],
+      firstName: 'Vasyl',
+      lastName: 'Petrenko',
+      sendingTime: '16:40',
+      lastMessage: 'How are you?',
+      readList: ['Vasyl', 'Petro', 'Stepan'],
       newMessages: [],
     },
     {
-      id: "3",
+      id: '3',
       isPinned: true,
-      firstName: "Vasyl",
-      lastName: "Petrenko",
-      sendingTime: "16:40",
-      lastMessage: "How are you?",
+      firstName: 'Vasyl',
+      lastName: 'Petrenko',
+      sendingTime: '16:40',
+      lastMessage: 'How are you?',
       readList: [],
-      newMessages: ["Hello!", "How are you?"],
+      newMessages: ['Hello!', 'How are you?'],
     },
   ]);
   return (
     <div className="flex flex-col mt-3">
-
       {chatList.map((item) => (
         <ChatSideBar
           id={item.id}
@@ -72,9 +71,7 @@ export default function Messages() {
               </div>
               <div className="text-sm font-medium">John Doe</div>
             </div>
-            <div className="text-sm text-[#000000] opacity-65 font-light">
-              16:45
-            </div>
+            <div className="text-sm text-[#000000] opacity-65 font-light">16:45</div>
           </div>
 
           <div className="flex items-center w-full justify-between">

@@ -1,19 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from 'react';
 
-export default function ProfileNavbar() {
-  const [userName, setUserName] = useState("");
-
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user) {
-      const parsedUser = JSON.parse(user);
-      if (parsedUser.companyName) {
-        setUserName(parsedUser.companyName);
-      } else if (parsedUser.firstName && parsedUser.lastName) {
-        setUserName(`${parsedUser.firstName} ${parsedUser.lastName}`);
-      }
-    }
-  }, []);
+interface ProfileNavbarProps {
+  userName: string;
+}
+export default function ProfileNavbar({ userName }: ProfileNavbarProps) {
   return (
     <div className="flex flex-col">
       <div className="text-xl font-oswald mb-2 text-gray-600 font-semibold">

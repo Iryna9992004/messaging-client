@@ -1,16 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
-      fontFamily:{
-        'sans':['Inter', 'sans-serif'],
-        'oswald':['Oswald', 'sans-serif']
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        oswald: ['Oswald', 'sans-serif'],
       },
-      colors:{
-        customGreen:'#27AE60'
+      colors: {
+        customGreen: '#27AE60',
       },
       animation: {
         'spinner-grow': 'spinner-grow 0.75s linear infinite',
@@ -25,4 +23,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
+};

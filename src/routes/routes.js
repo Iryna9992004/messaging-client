@@ -1,21 +1,21 @@
-import SignInPage from "../pages/SignInPage";
-import SignUpPage from "../pages/SignUpPage";
-import MessagePage from "../pages/MessagePage";
+import SignInPage from '../pages/SignInPage';
+import SignUpPage from '../pages/SignUpPage';
+import MessagePage from '../pages/MessagePage';
 
 export const publicRoutes = [
   {
-    link: "/",
+    link: '/',
     component: SignInPage,
   },
   {
-    link: "/auth/registration",
+    link: '/auth/registration',
     component: SignUpPage,
   },
 ];
 
 export const protectedRoutes = [
   {
-    link: "messaging",
+    link: 'messaging',
     component: MessagePage,
   },
 ];

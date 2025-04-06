@@ -1,4 +1,1 @@
-export const roles = [
-    'worker',
-    'company',
-]
+export const roles = ['worker', 'company'];

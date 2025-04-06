@@ -1,16 +1,18 @@
-import React, { useState } from "react";
-import { ReactComponent as UnreadMessage } from "../../assets_socket/UnreadMessage.svg";
-import { Video, Phone, Slash } from "react-feather";
-import More from "../../assets_socket/More";
-import { MessageDto } from "./types/MessageDto";
+import React, { useState } from 'react';
+import { ReactComponent as UnreadMessage } from '../../assets_socket/UnreadMessage.svg';
+import { Video, Phone, Slash } from 'react-feather';
+import More from '../../assets_socket/More';
+import { MessageDto } from './types/MessageDto';
 
 export default function ExactMessages() {
-  const [messages, setMessages]=useState<MessageDto[]>([{
-    id:'1',
-    text:'hello!',
-    date:'12:40',
-    owner:'me'
-  }])
+  const [messages, setMessages] = useState<MessageDto[]>([
+    {
+      id: '1',
+      text: 'hello!',
+      date: '12:40',
+      owner: 'me',
+    },
+  ]);
   return (
     <div
       className="fixed left-[364px] bg-[#FAFAFA] h-full flex flex-col"
@@ -20,9 +22,7 @@ export default function ExactMessages() {
         <div className="flex gap-3 items-start cursor-pointer">
           <div className="w-[45px] h-[45px] bg-green-500 rounded-full" />
           <div className="flex flex-col">
-            <span className="font-medium text-lg font-oswald">
-              Travis Barker
-            </span>
+            <span className="font-medium text-lg font-oswald">Travis Barker</span>
             <span className="text-customGreen text-sm">Online</span>
           </div>
         </div>
@@ -37,7 +37,7 @@ export default function ExactMessages() {
       <div className="flex-1 flex flex-col pt-[10px] px-5 pr-10 justify-end mb-[50px]">
         <div
           className="grid gap-1 items-center mt-10 mb-10"
-          style={{ gridTemplateColumns: "1fr 70px 1fr" }}
+          style={{ gridTemplateColumns: '1fr 70px 1fr' }}
         >
           <div className="h-[1px] bg-[#EEEEEE]"></div>
           <div className="w-[70px] flex justify-center">
@@ -47,23 +47,15 @@ export default function ExactMessages() {
         </div>
 
         <div className="flex flex-col self-start bg-[#F4F4F7] rounded-xl h-fit w-fit py-3 px-4">
-          <span className="text-[#000000] text-sm mb-1">
-            See you at office tomorrow!
-          </span>
-          <span className="text-[#000000] opacity-45 font-medium text-xs">
-            15:42
-          </span>
+          <span className="text-[#000000] text-sm mb-1">See you at office tomorrow!</span>
+          <span className="text-[#000000] opacity-45 font-medium text-xs">15:42</span>
         </div>
 
         <div className="flex flex-col self-end bg-[#F4F4F7] rounded-xl h-fit w-fit py-3 px-4">
-          <span className="text-[#000000] text-sm mb-1">
-            See you at office tomorrow!
-          </span>
+          <span className="text-[#000000] text-sm mb-1">See you at office tomorrow!</span>
           <div className="flex items-center gap-2 self-end">
             <UnreadMessage />
-            <span className="text-[#000000] opacity-45 font-medium text-xs">
-              15:42
-            </span>
+            <span className="text-[#000000] opacity-45 font-medium text-xs">15:42</span>
           </div>
         </div>
       </div>

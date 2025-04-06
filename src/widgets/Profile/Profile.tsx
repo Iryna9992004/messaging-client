@@ -1,55 +1,55 @@
-import React, { useEffect, useState } from "react";
-import { Bell, Copy, Edit2 } from "react-feather";
-import SearchForm from "../../components/SearchForm";
-import SelectActivity from "../../UI/SelectActivity";
-import ProfileInput from "../../UI/ProfileInput";
-import MemberList from "../../features/MemberList";
-import { MemberDto } from "./types/MemberDto";
-import UserPhoto from "../../UI/UserPhoto";
-import ProfileNavbar from "../../features/ProfileNavbar";
-import { updateWorkerData } from "../../services/workerService";
-import { updateCompanyData } from "../../services/companyService";
+import React, { useEffect, useState } from 'react';
+import { Bell, Copy, Edit2 } from 'react-feather';
+import SearchForm from '../../components/SearchForm';
+import SelectActivity from '../../UI/SelectActivity';
+import ProfileInput from '../../UI/ProfileInput';
+import MemberList from '../../features/MemberList';
+import { MemberDto } from './types/MemberDto';
+import UserPhoto from '../../UI/UserPhoto';
+import ProfileNavbar from '../../features/ProfileNavbar';
+import { updateWorkerData } from '../../services/workerService';
+import { updateCompanyData } from '../../services/companyService';
 
 export default function Profile() {
   const [memberList, setMemberList] = useState<MemberDto[]>([
     {
-      id: "1",
-      name: "John Me",
-      email: "john@gmail.com",
-      phone: "08734566",
+      id: '1',
+      name: 'John Me',
+      email: 'john@gmail.com',
+      phone: '08734566',
       active: true,
     },
     {
-      id: "2",
-      name: "John Me",
-      email: "john@gmail.com",
-      phone: "08734566",
+      id: '2',
+      name: 'John Me',
+      email: 'john@gmail.com',
+      phone: '08734566',
       active: false,
     },
     {
-      id: "3",
-      name: "John Me",
-      email: "john@gmail.com",
-      phone: "08734566",
+      id: '3',
+      name: 'John Me',
+      email: 'john@gmail.com',
+      phone: '08734566',
       active: true,
     },
   ]);
   const [userData, setUserData] = useState<any>({});
-  const [userName, setUserName] = useState<string>("");
+  const [userName, setUserName] = useState<string>('');
 
-  const [companyName, setCompanyName] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [companyName, setCompanyName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   const handleUpdateWorkerData = async () => {
-    const userString = localStorage.getItem("user");
+    const userString = localStorage.getItem('user');
     if (!userString) {
       return null;
     }
     const user = JSON.parse(userString);
     console.log(user.email);
-  
-    if (user.role === "worker") {
+
+    if (user.role === 'worker') {
       const response = await updateWorkerData({
         email: user.email,
         firstName: firstName,
@@ -58,12 +58,14 @@ export default function Profile() {
       if (response) {
         const newUser = { ...user, ...response.data };
         const newUserString = JSON.stringify(newUser);
-        localStorage.setItem("user", newUserString);
+        localStorage.setItem('user', newUserString);
         setUserName(`${newUser.firstName} ${newUser.lastName}`);
+        setFirstName('');
+        setLastName('');
       }
-    } 
-  
-    if (user.role === "company") { // Розділено перевірку ролі "company" в окремий блок
+    }
+
+    if (user.role === 'company') {
       const response = await updateCompanyData({
         email: user.email,
         companyName,
@@ -71,15 +73,15 @@ export default function Profile() {
       if (response) {
         const newUser = { ...user, ...response.data };
         const newUserString = JSON.stringify(newUser);
-        localStorage.setItem("user", newUserString);
+        localStorage.setItem('user', newUserString);
         setUserName(`${companyName}`);
+        setCompanyName('');
       }
     }
   };
-  
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
+    const user = localStorage.getItem('user');
     if (user) {
       const parsedUser = JSON.parse(user);
       setUserData(parsedUser);
@@ -97,7 +99,7 @@ export default function Profile() {
       style={{ width: `calc(100vw - 364px)` }}
     >
       <div className="sticky top-0 h-[100px] w-full flex items-center  py-4 justify-between bg-[#FAFAFA] z-[1000]">
-        <ProfileNavbar />
+        <ProfileNavbar userName={userName} />
 
         <div className="flex items-center gap-2">
           <div className="w-[46px] h-[46px] bg-blue-300 rounded-md"></div>
@@ -112,7 +114,7 @@ export default function Profile() {
         <div
           className="h-[100px] w-full opacity-60 rounded-tr-lg rounded-tl-lg"
           style={{
-            background: "linear-gradient(135deg, #00bfff 0%, #87cefa 100%)",
+            background: 'linear-gradient(135deg, #00bfff 0%, #87cefa 100%)',
           }}
         ></div>
 
@@ -122,14 +124,10 @@ export default function Profile() {
 
             <div className="flex flex-col">
               <div className="text-gray-700 flex items-center gap-4">
-                <div className="font-oswald font-semibold text-lg">
-                  {userName}
-                </div>{" "}
+                <div className="font-oswald font-semibold text-lg">{userName}</div>{' '}
                 <Copy className="stroke-gray-400 hover:stroke-gray-600 cursor-pointer duration-500" />
               </div>
-              <div className="font-medium text-sm text-gray-600">
-                {userData.email}
-              </div>
+              <div className="font-medium text-sm text-gray-600">{userData.email}</div>
             </div>
           </div>
 
@@ -143,7 +141,7 @@ export default function Profile() {
           </div>
         </div>
 
-        {userData.role === "company" ? (
+        {userData.role === 'company' ? (
           <div className="flex p-3 flex-col gap-3">
             <ProfileInput
               placeholder="Company Name"
@@ -153,26 +151,16 @@ export default function Profile() {
           </div>
         ) : null}
 
-        {userData.role === "worker" ? (
+        {userData.role === 'worker' ? (
           <div className="flex p-3 flex-col gap-3">
-            <ProfileInput
-              placeholder="First Name"
-              value={firstName}
-              setValue={setFirstName}
-            />
-            <ProfileInput
-              placeholder="Last Name"
-              value={lastName}
-              setValue={setLastName}
-            />
+            <ProfileInput placeholder="First Name" value={firstName} setValue={setFirstName} />
+            <ProfileInput placeholder="Last Name" value={lastName} setValue={setLastName} />
           </div>
         ) : null}
 
         <div className="flex flex-col p-3 w-full">
           <div className="flex items-center justify-between w-full">
-            <div className="text-[#000000] text-xl font-oswald ml-3">
-              All members
-            </div>
+            <div className="text-[#000000] text-xl font-oswald ml-3">All members</div>
 
             <div className="flex gap-3">
               <div className="w-[250px] ">

@@ -1,33 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { User, Lock, Globe, Book, BookOpen } from "react-feather";
-import Input from "../UI/Input";
-import { Link, useNavigate } from "react-router-dom";
-import { registerCompany, registerWorker } from "../services/auth/authService";
+import React, { useEffect, useState } from 'react';
+import { User, Lock, Globe, Book, BookOpen } from 'react-feather';
+import Input from '../UI/Input';
+import { Link, useNavigate } from 'react-router-dom';
+import { registerCompany, registerWorker } from '../services/auth/authService';
 
 export default function SignUpPage() {
   const navigate = useNavigate();
-  const [companyName, setCompanyName] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [companyName, setCompanyName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
-  const [choosenRole, setChoosenRole] = useState("worker");
+  const [choosenRole, setChoosenRole] = useState('worker');
 
   const handleRegisterUser = async () => {
     let response;
-    if (choosenRole === "company") {
+    if (choosenRole === 'company') {
       response = await registerCompany(companyName, email, password);
-    } else if (choosenRole === "worker") {
+    } else if (choosenRole === 'worker') {
       response = await registerWorker(firstName, lastName, email, password);
     }
 
     if (response) {
-      navigate("/messaging");
+      navigate('/messaging');
     }
   };
 
@@ -37,11 +37,11 @@ export default function SignUpPage() {
   };
 
   useEffect(() => {
-    setEmailError(!validateEmail(email) && email !== "");
+    setEmailError(!validateEmail(email) && email !== '');
   }, [email]);
 
   useEffect(() => {
-    setPasswordError(password.length < 6 && password !== "");
+    setPasswordError(password.length < 6 && password !== '');
   }, [password]);
 
   return (
@@ -55,25 +55,25 @@ export default function SignUpPage() {
           <div className="text-[13px] flex font-medium text-gray-400">
             <div
               className={`cursor-pointer ${
-                choosenRole === "worker" ? "border-b border-gray-300" : null
+                choosenRole === 'worker' ? 'border-b border-gray-300' : null
               }`}
-              onClick={() => setChoosenRole("worker")}
+              onClick={() => setChoosenRole('worker')}
             >
               Worker
-            </div>{" "}
+            </div>{' '}
             &nbsp; / &nbsp;
             <div
               className={`cursor-pointer ${
-                choosenRole === "company" ? "border-b border-gray-300" : null
+                choosenRole === 'company' ? 'border-b border-gray-300' : null
               }`}
-              onClick={() => setChoosenRole("company")}
+              onClick={() => setChoosenRole('company')}
             >
               Company
             </div>
           </div>
         </div>
         <div className="w-full flex flex-col gap-3">
-          {choosenRole === "worker" ? (
+          {choosenRole === 'worker' ? (
             <div className="flex flex-col gap-3">
               <Input
                 value={firstName}
@@ -92,7 +92,7 @@ export default function SignUpPage() {
             </div>
           ) : null}
 
-          {choosenRole === "company" ? (
+          {choosenRole === 'company' ? (
             <Input
               value={companyName}
               setValue={setCompanyName}
